@@ -12,13 +12,13 @@ import {AccountService} from '../account.service';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit {
-  private Projects: Array<Project> = [];
+   Projects: Array<Project> = [];
   name = new FormControl('', [Validators.required]);
   Message: FormGroup;
   displayedColumns: string[] = ['name', 'Votes', 'AddVote'];
   private privateKey: string;
   private publicKey: string;
-  private Tokencount: number;
+  public Tokencount: number;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
