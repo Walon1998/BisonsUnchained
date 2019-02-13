@@ -1,0 +1,25 @@
+<h1>Login</h1>
+<form [formGroup]="Message" #form>
+  <div class="example-container">
+    <mat-form-field>
+      <input matInput placeholder="Name" [formControl]="name" required type="text">
+      <mat-icon matSuffix>mail</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Password" [formControl]="password" required type="password">
+      <mat-icon matSuffix>mail</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="SendButton">
+    <button mat-button (click)="send(form)" matTooltip="Send"
+            matTooltipPosition="above"
+            class="mat-elevation-z1">
+      Login
+    </button>
+
+
+  </div>
+</form>
+
