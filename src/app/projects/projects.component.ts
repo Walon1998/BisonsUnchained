@@ -50,9 +50,12 @@ export class ProjectsComponent implements OnInit {
     if (this.Message.valid) {
       if (this.add(this.name.value)) {
         alert('You added' + this.name.value + 'to the community projects');
+        this.Message.reset();
       }
 
 
+    } else {
+      alert('Error');
     }
 
   }
