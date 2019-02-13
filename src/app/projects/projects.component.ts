@@ -15,6 +15,7 @@ export class ProjectsComponent implements OnInit {
   ngOnInit() {
     this.Projects = this.getAllProjects();
   }
+
 //Returns all projects in an array!
   private getAllProjects(): Array<Project> {
     return undefined;
