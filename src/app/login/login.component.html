@@ -1,25 +1,36 @@
-<h1>Login</h1>
-<form [formGroup]="Message" #form>
-  <div class="example-container">
-    <mat-form-field>
-      <input matInput placeholder="Name" [formControl]="name" required type="text">
-      <mat-icon matSuffix>mail</mat-icon>
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Password" [formControl]="password" required type="password">
-      <mat-icon matSuffix>mail</mat-icon>
-    </mat-form-field>
-  </div>
-
-  <div class="SendButton">
-    <button mat-button (click)="send(form)" matTooltip="Send"
-            matTooltipPosition="above"
-            class="mat-elevation-z1">
-      Login
-    </button>
+<div class="login">
 
 
-  </div>
-</form>
+  <form [formGroup]="Message" #form>
+    <div class="example-container">
+      <h1 class="mat-h1">Login</h1>
+      <mat-form-field>
+        <input matInput placeholder="Name" [formControl]="name" required type="text">
+      </mat-form-field>
 
+      <mat-form-field>
+        <input matInput placeholder="Password" [formControl]="password" required type="password"
+               [type]="hide ? 'password' : 'text'">
+        <mat-icon class="password" matSuffix
+                  (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="SendButton">
+
+      <button mat-button (click)="login()" matTooltip="Login"
+              matTooltipPosition="below"
+              class="mat-elevation-z1">
+        Login
+      </button>
+
+      <button style="margin-left: 10px" mat-button (click)="Register()" matTooltip="Register"
+              matTooltipPosition="below"
+              class="mat-elevation-z1">
+        Register
+      </button>
+
+
+    </div>
+  </form>
+</div>

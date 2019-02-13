@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   name = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
   Message: FormGroup;
+  hide = true;
 
   constructor(private fb: FormBuilder,
               private AccServ: AccountService, private router: Router) {
@@ -24,11 +25,16 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  send() {
+  login() {
     if (this.Message.valid && this.AccServ.login(this.name.value, this.password.value)) {
       this.router.navigate(['/hunter']);
     } else {
       alert('Try again!');
     }
+  }
+
+  Register() {
+    alert('Currently not supported!');
+
   }
 }
