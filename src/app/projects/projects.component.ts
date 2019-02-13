@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Project} from './Project';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-projects',
@@ -9,7 +12,12 @@ import {Project} from './Project';
 export class ProjectsComponent implements OnInit {
   private Projects: Array<Project>;
 
-  constructor() {
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches)
+    );
+
+  constructor(private breakpointObserver: BreakpointObserver) {
   }
 
   ngOnInit() {

@@ -6,6 +6,7 @@
       <h1 class="mat-h1">Login</h1>
       <mat-form-field>
         <input matInput placeholder="Name" [formControl]="name" required type="text">
+        <mat-error *ngIf="name.invalid">{{'required'}}</mat-error>
       </mat-form-field>
 
       <mat-form-field>
@@ -13,20 +14,21 @@
                [type]="hide ? 'password' : 'text'">
         <mat-icon class="password" matSuffix
                   (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <mat-error *ngIf="password.invalid">{{'required'}}</mat-error>
       </mat-form-field>
     </div>
 
     <div class="SendButton">
 
-      <button mat-button (click)="login()" matTooltip="Login"
+      <button mat-raised-button (click)="login()" matTooltip="Login"
               matTooltipPosition="below"
-              class="mat-elevation-z1">
+              >
         Login
       </button>
 
-      <button style="margin-left: 10px" mat-button (click)="Register()" matTooltip="Register"
+      <button style="margin-left: 10px" mat-raised-button (click)="Register()" matTooltip="Register"
               matTooltipPosition="below"
-              class="mat-elevation-z1">
+             >
         Register
       </button>
 

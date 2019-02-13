@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/hunter']);
     } else {
       alert('Try again!');
+      this.Message.reset();
     }
   }
 
