@@ -13,6 +13,7 @@ import {MatSelectionList} from '@angular/material';
 export class HunterComponent implements OnInit {
   private privateKey: string;
   private publicKey: string;
+  private Tokencount: number;
   @ViewChild('list') list: MatSelectionList;
 
   Tasks: Array<string> = ['Task1', 'Task2', 'Task3', 'Task4'];
@@ -29,6 +30,8 @@ export class HunterComponent implements OnInit {
   ngOnInit() {
     this.privateKey = this.accountService.getprivateKey();
     this.publicKey = this.accountService.getPublicKey();
+    this.accountService.updatedTokencount();
+    this.Tokencount = this.accountService.getTokenCount();
   }
 
   // Adds count tokens to the given Account
@@ -41,6 +44,8 @@ export class HunterComponent implements OnInit {
   Send(length: number) {
     if (this.add(length)) {
       alert('Congratulations, you\'ve earned' + length + 'VoteToken');
+      this.accountService.updatedTokencount();
+      this.Tokencount = this.accountService.getTokenCount();
     } else {
       alert('Error');
     }

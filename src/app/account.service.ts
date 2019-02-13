@@ -35,9 +35,14 @@ export class AccountService {
     return this.publicKey;
   }
 
+  public getTokenCount(): number {
+    return this.Tokencount;
+  }
+
   public updatedTokencount() {
     this.Tokencount = this.geTokencountfromBlockchain();
   }
+
 //
   private geTokencountfromBlockchain(): number {
     //TODO: Philipe

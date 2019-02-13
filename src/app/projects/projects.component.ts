@@ -18,6 +18,7 @@ export class ProjectsComponent implements OnInit {
   displayedColumns: string[] = ['name', 'Votes', 'AddVote'];
   private privateKey: string;
   private publicKey: string;
+  private Tokencount: number;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -37,6 +38,8 @@ export class ProjectsComponent implements OnInit {
     this.Projects.push(new Project('Name3', 3));
     this.privateKey = this.accountservice.getprivateKey();
     this.publicKey = this.accountservice.getPublicKey();
+    this.accountservice.updatedTokencount();
+    this.Tokencount = this.accountservice.getTokenCount();
   }
 
 // Returns all projects in an array!
@@ -65,6 +68,8 @@ export class ProjectsComponent implements OnInit {
         alert('You added' + this.name.value + 'to the community projects');
         this.Message.reset();
         this.getAllProjects();
+        this.accountservice.updatedTokencount();
+        this.Tokencount = this.accountservice.getTokenCount();
       } else {
         alert('Error');
       }
@@ -79,7 +84,8 @@ export class ProjectsComponent implements OnInit {
     if (this.voteOn(name, 1)) {
       alert('You spent one Token on' + name);
       this.getAllProjects();
-
+      this.accountservice.updatedTokencount();
+      this.Tokencount = this.accountservice.getTokenCount();
     } else {
       alert('Error');
     }
