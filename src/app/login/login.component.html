@@ -5,7 +5,7 @@
     <div class="example-container">
       <h1 class="mat-h1">Login</h1>
       <mat-form-field>
-        <input matInput placeholder="Name" [formControl]="name" required type="text">
+        <input matInput placeholder="Username" [formControl]="name" required type="text">
         <mat-error *ngIf="name.invalid">{{'required'}}</mat-error>
       </mat-form-field>
 
