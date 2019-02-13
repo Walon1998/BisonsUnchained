@@ -38,22 +38,30 @@
       </form>
     </div>
 
-    <div class="table">
-      <table mat-table [dataSource]="Projects" class="at-elevation-z8">
+    <div>
+      <table mat-table [dataSource]="Projects" class="at-elevation-z8 table">
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Name</th>
           <td mat-cell *matCellDef="let element"> {{element.name}} </td>
         </ng-container>
 
         <ng-container matColumnDef="Votes">
-          <th mat-header-cell *matHeaderCellDef> Votes </th>
+          <th mat-header-cell *matHeaderCellDef> Votes</th>
           <td mat-cell *matCellDef="let element"> {{element.voters}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="AddVote">
+          <th mat-header-cell *matHeaderCellDef> Add Vote</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon (tap)="TablePlusTapped(element.name)">add</mat-icon>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
 
     </div>
-    <button mat-button (tap)="voteOn('Project',1)">VoteOn Project</button>
 
 
     <!-- Add Content Here -->

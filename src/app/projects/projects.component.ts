@@ -12,9 +12,10 @@ import {AccountService} from '../account.service';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit {
-  private Projects: Array<Project>;
+  private Projects: Array<Project> = [];
   name = new FormControl('', [Validators.required]);
   Message: FormGroup;
+  displayedColumns: string[] = ['name', 'Votes', 'AddVote'];
   private privateKey: string;
   private publicKey: string;
 
@@ -40,7 +41,8 @@ export class ProjectsComponent implements OnInit {
 
 // Returns all projects in an array!
   private getAllProjects(): Array<Project> {
-    return undefined;
+    const Projects: Array<Project> = [];
+    return Projects;
   }
 
   // Adds a new Project to the Blockchain
@@ -67,5 +69,14 @@ export class ProjectsComponent implements OnInit {
       alert('Add a name');
     }
 
+  }
+
+  TablePlusTapped(name: string) {
+    if (this.voteOn(name, 1)) {
+      alert('You spent one Token on' + name);
+
+    } else {
+      alert('Error');
+    }
   }
 }
