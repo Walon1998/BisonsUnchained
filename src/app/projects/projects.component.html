@@ -1,5 +1,3 @@
-
-
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
                [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
@@ -23,13 +21,19 @@
       </button>
       <span>BisonsUnchained</span>
     </mat-toolbar>
+    <h1 class="mat-h1 title"> Community Projects</h1>
+    <form [formGroup]="Message" #form>
+      <mat-form-field>
+        <input matInput placeholder="Name" [formControl]="name" required type="text">
+        <mat-error *ngIf="name.invalid">{{'required'}}</mat-error>
+      </mat-form-field>
+      <button mat-raised-button (click)="commit()" matTooltip="Commit"
+              matTooltipPosition="below"
+      >
+        Commit
+      </button>
+    </form>
 
-    <p>
-      hunter works not!
-    </p>
-    <p>
-      projects works!
-    </p>
     <button mat-button (tap)="add('Project')">Add Project</button>
     <button mat-button (tap)="voteOn('Project',1)">VoteOn Project</button>
 
