@@ -33,9 +33,9 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit() {
     this.Projects = this.getAllProjects();
-    this.Projects.push(new Project('Name', 1));
-    this.Projects.push(new Project('Name2', 2));
-    this.Projects.push(new Project('Name3', 3));
+    this.Projects.push(new Project('Doctor Office', 1));
+    this.Projects.push(new Project('Kindergarden', 2));
+    this.Projects.push(new Project('Freshwater filter', 3));
     this.privateKey = this.accountservice.getprivateKey();
     this.publicKey = this.accountservice.getPublicKey();
     this.accountservice.updatedTokencount();

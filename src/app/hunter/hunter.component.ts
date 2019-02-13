@@ -16,7 +16,7 @@ export class HunterComponent implements OnInit {
   Tokencount: number;
   @ViewChild('list') list: MatSelectionList;
 
-  Tasks: Array<string> = ['Task1', 'Task2', 'Task3', 'Task4'];
+  Tasks: Array<string> = ['Trail Maintenance', 'Camera Set-up', 'Sensor Set-Up', 'Track Monitoring'];
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
