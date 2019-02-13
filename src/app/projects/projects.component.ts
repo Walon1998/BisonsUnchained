@@ -61,6 +61,7 @@ export class ProjectsComponent implements OnInit {
       if (this.add(this.name.value)) {
         alert('You added' + this.name.value + 'to the community projects');
         this.Message.reset();
+        this.getAllProjects();
       } else {
         alert('Error');
       }
@@ -74,6 +75,7 @@ export class ProjectsComponent implements OnInit {
   TablePlusTapped(name: string) {
     if (this.voteOn(name, 1)) {
       alert('You spent one Token on' + name);
+      this.getAllProjects();
 
     } else {
       alert('Error');

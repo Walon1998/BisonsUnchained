@@ -8,6 +8,7 @@ import {AccountDatabase} from './accountdatabase';
 export class AccountService {
   private publicKey: string;
   private privateKey: string;
+  private Tokencount: number;
   private Accounts: Array<Account> = AccountDatabase;
 
   constructor() {
@@ -19,6 +20,7 @@ export class AccountService {
         this.publicKey = entry.publickey;
 
         this.privateKey = entry.privatekey;
+        this.updatedTokencount();
         return true;
       }
     }
@@ -32,4 +34,14 @@ export class AccountService {
   public getPublicKey(): string {
     return this.publicKey;
   }
+
+  public updatedTokencount() {
+    this.Tokencount = this.geTokencountfromBlockchain();
+  }
+//
+  private geTokencountfromBlockchain(): number {
+    //TODO: Philipe
+    return 0;
+  }
+
 }
