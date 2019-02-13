@@ -13,7 +13,7 @@ import {MatSelectionList} from '@angular/material';
 export class HunterComponent implements OnInit {
   private privateKey: string;
   private publicKey: string;
-  private Tokencount: number;
+  Tokencount: number;
   @ViewChild('list') list: MatSelectionList;
 
   Tasks: Array<string> = ['Task1', 'Task2', 'Task3', 'Task4'];
