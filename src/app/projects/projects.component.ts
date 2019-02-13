@@ -4,6 +4,7 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AccountService} from '../account.service';
 
 @Component({
   selector: 'app-projects',
@@ -14,13 +15,15 @@ export class ProjectsComponent implements OnInit {
   private Projects: Array<Project>;
   name = new FormControl('', [Validators.required]);
   Message: FormGroup;
+  private privateKey: string;
+  private publicKey: string;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private fb: FormBuilder) {
+  constructor(private breakpointObserver: BreakpointObserver, private fb: FormBuilder, private accountservice: AccountService) {
     this.Message = fb.group({
       name: this.name,
     });
@@ -28,6 +31,11 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit() {
     this.Projects = this.getAllProjects();
+    this.Projects.push(new Project('Name', 1));
+    this.Projects.push(new Project('Name2', 2));
+    this.Projects.push(new Project('Name3', 3));
+    this.privateKey = this.accountservice.getprivateKey();
+    this.publicKey = this.accountservice.getPublicKey();
   }
 
 // Returns all projects in an array!
@@ -37,25 +45,26 @@ export class ProjectsComponent implements OnInit {
 
   // Adds a new Project to the Blockchain
   add(projectname: string): boolean {
-    return true;
+    return false;
   }
 
   // Vote woih amout of token on a given project
   voteOn(projectname: string, amount: number): boolean {
-    return true; // AY, DY
+    return false; // AY, DY
   }
 
 
-  commit() {
+  AddButton() {
     if (this.Message.valid) {
       if (this.add(this.name.value)) {
         alert('You added' + this.name.value + 'to the community projects');
         this.Message.reset();
+      } else {
+        alert('Error');
       }
 
-
     } else {
-      alert('Error');
+      alert('Add a name');
     }
 
   }
