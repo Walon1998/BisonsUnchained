@@ -18,6 +18,7 @@ export class HunterComponent implements OnInit {
     this.publicKey = this.accountService.getPublicKey();
   }
 
+  //Adds count tokens to the given Account
   add(count: number): boolean {
     console.log('Add 100');
     return true;
