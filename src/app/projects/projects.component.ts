@@ -36,7 +36,7 @@ export class ProjectsComponent implements OnInit {
 
   //Vote woih amout of token on a given project
   voteOn(projectname: string, amount: number): boolean {
-    return true;
+    return true; //AY, DY
   }
 
 
