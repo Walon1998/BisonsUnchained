@@ -72,6 +72,7 @@ export class ProjectsComponent implements OnInit {
         this.Tokencount = this.accountservice.getTokenCount();
       } else {
         alert('Error');
+        this.Message.reset();
       }
 
     } else {

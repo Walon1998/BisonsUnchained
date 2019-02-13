@@ -30,10 +30,10 @@
           {{task}}
         </mat-list-option>
       </mat-selection-list>
-      <p style="text-align: right">
+      <p style="text-align: right; margin-right: 10px">
         Options selected: {{list.selectedOptions.selected.length}}
       </p>
-      <button style="float: right" mat-raised-button (tap)="Send(list.selectedOptions.selected.length)"> Commit</button>
+      <button style="float: right; margin-right: 10px" mat-raised-button (tap)="Send(list.selectedOptions.selected.length)"> Commit</button>
     </div>
 
     <!-- Add Content Here -->

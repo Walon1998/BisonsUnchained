@@ -27,7 +27,7 @@
 
       <form [formGroup]="Message" #form class="form">
         <mat-form-field>
-          <input matInput placeholder="Project Name" [formControl]="name" required type="text">
+          <input matInput placeholder="Projectname" [formControl]="name" required type="text">
           <mat-error *ngIf="name.invalid">{{'required'}}</mat-error>
         </mat-form-field>
         <button style="margin-left: 20px" mat-raised-button (click)="AddButton()" matTooltip="Commit"
