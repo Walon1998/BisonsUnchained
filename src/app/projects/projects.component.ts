@@ -42,16 +42,19 @@ export class ProjectsComponent implements OnInit {
 // Returns all projects in an array!
   private getAllProjects(): Array<Project> {
     const Projects: Array<Project> = [];
+    // TODO: Phillipe
     return Projects;
   }
 
   // Adds a new Project to the Blockchain
   add(projectname: string): boolean {
+    // TODO: Phillipe
     return false;
   }
 
   // Vote woih amout of token on a given project
   voteOn(projectname: string, amount: number): boolean {
+    // TODO: Phillipe
     return false; // AY, DY
   }
 
