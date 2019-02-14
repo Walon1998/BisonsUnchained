@@ -5,9 +5,11 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AccountService} from '../account.service';
-import {WEB3} from './web3';
-import Web3 from 'web3';
-import {ABIFile} from './ABIFile';
+
+declare var getAllProjects: any;
+declare var addProject: any;
+declare var voteOnProject: any;
+declare var web3: any;
 
 declare var getTokencountfromBlockchain: any;
 
@@ -33,8 +35,7 @@ export class ProjectsComponent implements OnInit {
     );
 
   constructor(private breakpointObserver: BreakpointObserver,
-              private fb: FormBuilder, private accountservice: AccountService,
-              @Inject(WEB3) private web3: Web3) {
+              private fb: FormBuilder, private accountservice: AccountService) {
     this.Message = fb.group({
       name: this.name,
     });
@@ -62,7 +63,7 @@ export class ProjectsComponent implements OnInit {
       console.log(this.Tokencount);
     });
 
-    if (typeof this.web3 !== 'undefined') {
+    if (typeof web3 !== 'undefined') {
 
     } else {
       console.log('No Web3 Detected... using HTTP Provider');
@@ -71,7 +72,6 @@ export class ProjectsComponent implements OnInit {
 
 
   }
-
 
 
   AddButton() {
@@ -98,7 +98,7 @@ export class ProjectsComponent implements OnInit {
 
   TablePlusTapped(name: string) {
     if (voteOnProject(name, 1)) {
-      alert('You spent one Token on' + name);
+      alert('You spent one Token on: ' + name);
       this.Projects = getAllProjects();
       this.accountservice.updatedTokencount();
       this.Tokencount = this.accountservice.getTokenCount();
