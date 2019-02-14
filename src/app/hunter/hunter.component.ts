@@ -1,13 +1,11 @@
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AccountService} from '../account.service';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {MatSelectionList} from '@angular/material';
 
-declare var updateToken: any;
 declare var getTokencountfromBlockchain: any;
-declare var web3: any;
 declare var addToken: any;
 
 @Component({
@@ -29,7 +27,6 @@ export class HunterComponent implements OnInit {
     .pipe(
       map(result => result.matches)
     );
-  private projectsContract: any;
 
   constructor(private accountService: AccountService,
               private breakpointObserver: BreakpointObserver) {
@@ -39,57 +36,15 @@ export class HunterComponent implements OnInit {
   ngOnInit() {
     this.privateKey = this.accountService.getprivateKey();
     this.publicKey = this.accountService.getPublicKey();
-    // this.accountService.updatedTokencount();
 
     getTokencountfromBlockchain().then((result) => {
       this.Tokencount = result;
-      console.log(this.Tokencount);
     });
-
-
-    // console.log(Web3.givenProvider);
-
-
-    // const accounts = await this.web3.eth.getAccounts();
-    // console.log(accounts);
-
-
   }
-
-  // Adds count tokens to the given Account
-  // addToken(count: number): boolean {
-  //   return addTokenJs(count);
-  //   console.log('Add 100');
-  //   // dummy code, funktioniert soweit
-  //   /* projectsContract.createToken(1, (error, result) => {
-  //      if (!error) {
-  //        console.log(JSON.stringify(result));
-  //        return true;
-  //      } else {
-  //        console.error(error);
-  //        return false;
-  //      }
-  //    });*/
-  //
-  //   // how to get the return value??????????????????????????????????????????????????????????????????????
-  //   this.projectsContract.incrVotes.call(0, (error, result) => {
-  //     if (!error) {
-  //       console.log(result);
-  //       console.log(result[0]);
-  //       console.log(result > 0);
-  //       console.log(JSON.stringify(result));
-  //     } else {
-  //       console.error(error);
-  //     }
-  //   });
-  //   return false;
-  // }
 
   Send(length: number) {
     if (addToken(length)) {
-      alert('Congratulations, you\'ve earned ' + length + ' VoteToken');
-      this.accountService.updatedTokencount();
-      this.Tokencount = this.accountService.getTokenCount();
+      alert('Congratulations, you\'ve earned ' + length + ' VotingToken(s)');
     } else {
       alert('Error');
     }

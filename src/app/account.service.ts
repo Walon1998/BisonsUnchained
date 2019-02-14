@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Account} from './account';
 import {AccountDatabase} from './accountdatabase';
+
 declare var getTokencountfromBlockchain: any;
 
 @Injectable({
@@ -40,8 +41,14 @@ export class AccountService {
     return this.Tokencount;
   }
 
-  public updatedTokencount() {
-    this.Tokencount = getTokencountfromBlockchain();
+  public updatedTokencount(): number {
+    return getTokencountfromBlockchain().then((result) => {
+      this.Tokencount = result;
+      // console.log('LOGIN: ' + this.Tokencount);
+      return result;
+
+    });
+    // this.Tokencount = getTokencountfromBlockchain();
   }
 
 

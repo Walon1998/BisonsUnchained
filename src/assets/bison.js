@@ -17,17 +17,16 @@ window.addEventListener('load', function () {
 
     projectsContract.events.NewIncrVotes((error, result) => {
 
-      // console.log('result');
-      // console.log(result);
-      // console.log(result.returnValues);
-      // console.log(result.returnValues[0]);
-      // updateToken(result.returnValues[0]);
-      document.querySelector('body > app-root > app-hunter > mat-sidenav-container > mat-sidenav-content > mat-toolbar > span:nth-child(2)').innerHTML = '\n' +
-        'BisonsUnchained: ' + result.returnValues[0];
+      if (result.returnValues[1] === userAccount) {
+        //TODO: FIX
+        document.querySelector('body > app-root > app-hunter > mat-sidenav-container > mat-sidenav-content > mat-toolbar > span:nth-child(2)').innerHTML = '\n' +
+          'BisonsUnchained: ' + result.returnValues[0];
+      }
+
     });
 
   } else {
-    console.log('No Web3 Detected... using HTTP Provider');
+    // console.log('No Web3 Detected... using HTTP Provider');
     alert('Please install Metamask, you stupid! Visit https://metamask.io/');
     // window.web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/<APIKEY>"));
   }
@@ -44,7 +43,7 @@ function addToken(count) {
   projectsContract.methods.incrVotes(index).send({
     from: userAccount
   }).on('transactionHash', (hash) => {
-    console.log(hash);
+    // console.log(hash);
   }).on('error', (error) => {
     return false;
   });
@@ -84,8 +83,7 @@ function getLength() {
 }
 
 function SumUP(length, Returnarray, i) {
-  // var Returnarray = [];
-  // for (var i = 0; i < length; i++) {
+
 
 
   return getProposalJS(i).then((result) => {
@@ -100,12 +98,10 @@ function SumUP(length, Returnarray, i) {
       });
     }
 
-    // Returnarray.push({name: 'name', voters: "99"});
-    // console.log(result2);
+
 
 
   });
-  // return Returnarray;
 
 
 }
@@ -122,34 +118,13 @@ function getAllProjects() {
   });
 
 
-  //
-  //
-  // for (var i = 0; i < length; i++) {
-
-  //
-  //   getProposalJS(i).then((result3) => {
-  //     Returnarray.push({name: 'name', voters: "99"});
-  //     var result2 = result3;
-  //     if (result2[1] === true) {
-  //
-  //       Returnarray.push({name: String(result2[0]), voters: String(result2[2])});
-  //       console.log('add!');
-  //       }
-  //     });
-
-
-  // }
-    // console.log("Length ist: " + result);
-
-
-  // });
 }
 
 function getProposalJS(i) {
   return projectsContract.methods.getProposal(i).call({
     from: userAccount
   }).then((result) => {
-    console.log("You read " + result);
+    // console.log("You read " + result);
     return result;
 
   });
@@ -159,7 +134,7 @@ function getTokencountfromBlockchain() {
   return projectsContract.methods.getVotes().call({
     from: userAccount
   }).then((result) => {
-    console.log("You have " + result + " Votes available");
+    // console.log("You have " + result + " Votes available");
     return result;
   });
 }
