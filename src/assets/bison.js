@@ -1,6 +1,4 @@
-// const web3 = new Web3(Web3.givenProvider || "ws://localhost:8546");
 
-var testResult;
 const projectsAddress = '0xba955f4e0cf4d8dc8b98a6be515a240280358cff';
 var projectsContract;
 var userAccount;
@@ -17,21 +15,14 @@ window.addEventListener('load', function () {
       userAccount = accounts[0];
     });
 
-    // subscription = web3.eth.subscribe('logs', {
-    //   address: projectsAddress,
-    //   topics: ['0x12345...']
-    // }, (error, result) => {
-    //   if (!error)
-    //     console.log(result);
-    // });
 
     projectsContract.events.NewIncrVotes((error, result) => {
 
-      console.log('result');
-      console.log(result);
-      console.log(result.returnValues);
-      console.log(result.returnValues[0]);
-      // updateToken(result.returnValues[0]);
+      // console.log('result');
+      // console.log(result);
+      // console.log(result.returnValues);
+      // console.log(result.returnValues[0]);
+      // // updateToken(result.returnValues[0]);
       document.querySelector('body > app-root > app-hunter > mat-sidenav-container > mat-sidenav-content > mat-toolbar > span:nth-child(2)').innerHTML = '\n' +
         'BisonsUnchained: ' + result.returnValues[0];
     });
@@ -39,27 +30,12 @@ window.addEventListener('load', function () {
   } else {
     console.log('No Web3 Detected... using HTTP Provider');
     alert('Please install Metamask, you stupid! Visit https://metamask.io/');
-    window.web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/<APIKEY>"));
+    // window.web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/<APIKEY>"));
   }
 });
 
-function getBalance() {
-  var address, wei, balance
-  address = document.getElementById("address").value
-  try {
-    web3.eth.getBalance(address, function (error, wei) {
-      if (!error) {
-        var balance = web3.fromWei(wei, 'ether');
-        document.getElementById("output").innerHTML = balance + " ETH";
-      }
-    });
-  } catch (err) {
-    document.getElementById("output").innerHTML = err;
-  }
-}
-
 function addToken(count) {
-  console.log(count);
+  // console.log(count);
   if (count === 0)
     return false;
   let index = 0;

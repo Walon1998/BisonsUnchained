@@ -4,6 +4,7 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {MatSelectionList} from '@angular/material';
+
 declare var updateToken: any;
 declare var getTokencountfromBlockchain: any;
 declare var web3: any;
@@ -52,12 +53,6 @@ export class HunterComponent implements OnInit {
     // const accounts = await this.web3.eth.getAccounts();
     // console.log(accounts);
 
-    if (typeof web3 !== 'undefined') {
-
-    } else {
-      console.log('No Web3 Detected... using HTTP Provider');
-      alert('Please install Metamask, you stupid! Visit https://metamask.io/');
-    }
 
   }
 

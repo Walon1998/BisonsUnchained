@@ -63,12 +63,6 @@ export class ProjectsComponent implements OnInit {
       console.log(this.Tokencount);
     });
 
-    if (typeof web3 !== 'undefined') {
-
-    } else {
-      console.log('No Web3 Detected... using HTTP Provider');
-      alert('Please install Metamask, you stupid! Visit https://metamask.io/');
-    }
 
 
   }
