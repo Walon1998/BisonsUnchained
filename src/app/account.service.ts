@@ -40,12 +40,12 @@ export class AccountService {
   }
 
   public updatedTokencount() {
-    this.Tokencount = this.geTokencountfromBlockchain();
+    this.Tokencount = this.getTokencountfromBlockchain();
   }
 
 //
-  private geTokencountfromBlockchain(): number {
-    //TODO: Philipe
+  private getTokencountfromBlockchain(): number {
+    //TODO: Philipp
     return 0;
   }
 
