@@ -30,7 +30,9 @@ export class ProjectsComponent implements OnInit {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private fb: FormBuilder, private accountservice: AccountService, @Inject(WEB3) private web3: Web3) {
+  constructor(private breakpointObserver: BreakpointObserver,
+              private fb: FormBuilder, private accountservice: AccountService,
+              @Inject(WEB3) private web3: Web3) {
     this.Message = fb.group({
       name: this.name,
     });

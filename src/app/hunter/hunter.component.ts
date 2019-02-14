@@ -28,7 +28,9 @@ export class HunterComponent implements OnInit {
     );
   private projectsContract: any;
 
-  constructor(private accountService: AccountService, private breakpointObserver: BreakpointObserver, @Inject(WEB3) private web3: Web3) {
+  constructor(private accountService: AccountService,
+              private breakpointObserver: BreakpointObserver,
+              @Inject(WEB3) private web3: Web3) {
   }
 
 
@@ -66,13 +68,13 @@ export class HunterComponent implements OnInit {
       //   }
       // });
 
-
-      this.projectsContract.methods.incrVotes(0).send({
-        from: '0x915613D93e229f3dFA6E36dA3c10EEa61b55B157'
-      }).on('transactionHash', (hash) => {
-        // receipt example
-        console.log(hash);
-      });
+      // this.web3.eth.getAccounts(console.log);
+      // this.projectsContract.methods.incrVotes(0).send({
+      //   from: '0x9529dE56b77967f95A356b804572DE1045BA4095'
+      // }).on('transactionHash', (hash) => {
+      //   // receipt example
+      //   console.log(hash);
+      // });
 
       // testContract.methods.incrVotes(0).call().then((result) => {
       //   console.log("Return value of call: " + result);
