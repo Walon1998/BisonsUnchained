@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Account} from './account';
 import {AccountDatabase} from './accountdatabase';
+declare var getTokencountfromBlockchain: any;
 
 @Injectable({
   providedIn: 'root'
