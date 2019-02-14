@@ -1,5 +1,4 @@
-
-const projectsAddress = '0xba955f4e0cf4d8dc8b98a6be515a240280358cff';
+const projectsAddress = '0xce09cfa333c808996ba51ae6f9785fa617503ce7';
 var projectsContract;
 var userAccount;
 var subscription;
@@ -22,7 +21,7 @@ window.addEventListener('load', function () {
       // console.log(result);
       // console.log(result.returnValues);
       // console.log(result.returnValues[0]);
-      // // updateToken(result.returnValues[0]);
+      // updateToken(result.returnValues[0]);
       document.querySelector('body > app-root > app-hunter > mat-sidenav-container > mat-sidenav-content > mat-toolbar > span:nth-child(2)').innerHTML = '\n' +
         'BisonsUnchained: ' + result.returnValues[0];
     });
@@ -78,11 +77,25 @@ function voteOnProject(projectname, amount) {
 
 // Returns all projects in an array!
 function getAllProjects() {
-  return projectsContract.Proposals.call({
+  return projectsContract.methods.getProposalsLength().call({
     from: userAccount
   }).then((result) => {
-    console.log("You have " + result + " Votes available");
-    return result;
+    var Returnarray = [];
+    for (var i = 0; i < result; i++) {
+      projectsContract.methods.getProposal(i).call({
+        from: userAccount
+      }).then((result2) => {
+        if (result2[1]) {
+          Returnarray.push({name: result2[0], voters: result2[2]});
+        }
+        console.log('Item' + result2[0]);
+        console.log('Item' + result2[1]);
+        console.log('Item' + result2[2]);
+      });
+    }
+    // console.log("Length ist: " + result);
+
+    return Returnarray;
   });
 }
 

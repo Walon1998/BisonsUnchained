@@ -19,7 +19,7 @@ declare var getTokencountfromBlockchain: any;
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit {
-  Projects: Array<Project> = [];
+  Projects: Array<any> = [];
   name = new FormControl('', [Validators.required]);
   Message: FormGroup;
   displayedColumns: string[] = ['name', 'Votes', 'AddVote'];
@@ -42,8 +42,13 @@ export class ProjectsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.Projects = getAllProjects();
-    console.log(this.Projects);
+    getAllProjects().then((result) => {
+      this.Projects = result;
+
+      console.log(this.Projects);
+    });
+    // getAllProjects();
+
     // this.Projects.push(new Project('Doctor Office', 1));
     // this.Projects.push(new Project('Kindergarden', 2));
     // this.Projects.push(new Project('Freshwater filter', 3));
@@ -64,7 +69,6 @@ export class ProjectsComponent implements OnInit {
     });
 
 
-
   }
 
 
@@ -73,7 +77,11 @@ export class ProjectsComponent implements OnInit {
       if (addProject(this.name.value)) {
         alert('You added' + this.name.value + 'to the community projects');
         this.Message.reset();
-        this.Projects = getAllProjects();
+        // getAllProjects();
+        getAllProjects().then((result) => {
+          this.Projects = result;
+          console.log(this.Projects);
+        });
 
         getTokencountfromBlockchain().then((result) => {
           this.Tokencount = result;
