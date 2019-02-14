@@ -5,7 +5,7 @@ var subscription;
 
 window.addEventListener('load', function () {
   if (typeof web3 !== 'undefined') {
-    console.log('Web3 Detected! ' + web3.currentProvider.constructor.name);
+    // console.log('Web3 Detected! ' + web3.currentProvider.constructor.name);
     web3 = new Web3(web3.currentProvider);
 
     projectsContract = new web3.eth.Contract(projectsABI, projectsAddress);
@@ -55,7 +55,7 @@ function addProject(projectname) {
   projectsContract.methods.createProposal(projectname).send({
     from: userAccount
   }).on('transactionHash', (hash) => {
-    console.log(hash);
+    // console.log(hash);
   }).on('error', (error) => {
     return false;
   });
@@ -67,7 +67,7 @@ function voteOnProject(projectname, amount) {
   projectsContract.methods.payVotes(projectname, amount).send({
     from: userAccount
   }).on('transactionHash', (hash) => {
-    console.log(hash);
+    // console.log(hash);
   }).on('error', (error) => {
     return false;
   });
@@ -87,9 +87,9 @@ function SumUP(length, Returnarray, i) {
 
 
   return getProposalJS(i).then((result) => {
-    console.log(result);
+    // console.log(result);
     Returnarray.push({name: result[0], voters: result[2]});
-    console.log('add');
+    // console.log('add');
     if (i === length - 1) {
       return Returnarray;
     } else {
@@ -110,7 +110,7 @@ function getAllProjects() {
 
   return getLength().then((result) => {
     var length = result;
-    console.log('Length: ' + length);
+    // console.log('Length: ' + length);
     var Returnarray = [];
     return SumUP(length, Returnarray, 0);
 
