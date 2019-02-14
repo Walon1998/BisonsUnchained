@@ -35,14 +35,36 @@ export class HunterComponent implements OnInit {
   }
 
   // Adds count tokens to the given Account
-  add(count: number): boolean {
+  addToken(count: number): boolean {
     console.log('Add 100');
-    // TODO: Phillipe
+    // TODO: Philipp
+    // dummy code, funktioniert soweit
+    /* projectsContract.createToken(1, (error, result) => {
+       if (!error) {
+         console.log(JSON.stringify(result));
+         return true;
+       } else {
+         console.error(error);
+         return false;
+       }
+     });*/
+
+    // how to get the return value??????????????????????????????????????????????????????????????????????
+    projectsContract.incrVotes.call(0, (error, result) => {
+      if (!error) {
+        console.log(result);
+        console.log(result[0]);
+        console.log(result > 0);
+        console.log(JSON.stringify(result));
+      } else {
+        console.error(error);
+      }
+    });
     return false;
   }
 
   Send(length: number) {
-    if (this.add(length)) {
+    if (this.addToken(length)) {
       alert('Congratulations, you\'ve earned' + length + 'VoteToken');
       this.accountService.updatedTokencount();
       this.Tokencount = this.accountService.getTokenCount();
