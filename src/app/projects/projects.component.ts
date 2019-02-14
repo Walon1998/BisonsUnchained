@@ -7,20 +7,6 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AccountService} from '../account.service';
 
 
-// Check if user has Metamask installed
-window.addEventListener('load', function() {
-  if (typeof web3 !== 'undefined') {
-    console.log('Web3 Detected! ' + web3.currentProvider.constructor.name);
-    // TODO Philipp
-    //const projectsAddress = '0x1611d14ADc2A1a1d5947303DB2180e43AA0f1D5E'; // bleibt die Adresse auch bei Updates des Contracts...?
-    const projectsAddress = '0xbbf289d846208c16edc8474705c748aff07732db';
-    projectsContract = web3.eth.contract(projectsABI).at(projectsAddress); // initalize contract
-  } else {
-    console.log('No Web3 Detected... using HTTP Provider');
-    alert('Please install Metamask, you stupid! Visit https://metamask.io/');
-    // window.web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/<APIKEY>'));
-  }
-});
 
 @Component({
   selector: 'app-projects',
@@ -28,13 +14,14 @@ window.addEventListener('load', function() {
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit {
-   Projects: Array<Project> = [];
+  Projects: Array<Project> = [];
   name = new FormControl('', [Validators.required]);
   Message: FormGroup;
   displayedColumns: string[] = ['name', 'Votes', 'AddVote'];
   private privateKey: string;
   private publicKey: string;
   public Tokencount: number;
+  private projectsContract: any;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -56,13 +43,27 @@ export class ProjectsComponent implements OnInit {
     this.publicKey = this.accountservice.getPublicKey();
     this.accountservice.updatedTokencount();
     this.Tokencount = this.accountservice.getTokenCount();
+
+    if (typeof web3 !== 'undefined') {
+      console.log('Web3 Detected! ' + web3.currentProvider.constructor.name);
+      // TODO Philipp
+      // const projectsAddress = '0x1611d14ADc2A1a1d5947303DB2180e43AA0f1D5E'; // bleibt die Adresse auch bei Updates des Contracts...?
+      const projectsAddress = '0xbbf289d846208c16edc8474705c748aff07732db';
+      this.projectsContract = web3.eth.contract(projectsABI).at(projectsAddress); // initalize contract
+    } else {
+      console.log('No Web3 Detected... using HTTP Provider');
+      alert('Please install Metamask, you stupid! Visit https://metamask.io/');
+      // window.web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/<APIKEY>'));
+    }
   }
 
 // Returns all projects in an array!
   private getAllProjects(): Array<Project> {
-    // const Projects: Array<Project> = [];
+    const Projects: Array<Project> = [];
+    return Projects;
+
     // TODO: Philipp
-    this.Projects = projectsContract.lookAtActiveProposals((error, result) => {
+    this.Projects = this.projectsContract.lookAtActiveProposals((error, result) => {
       if (!error) {
         console.log(JSON.stringify(result));
       } else {
@@ -75,14 +76,14 @@ export class ProjectsComponent implements OnInit {
   // Adds a new Project to the Blockchain
   addProject(projectname: string): boolean {
     // TODO: Philipp
-    //projectsContracts.createProposal()
+    // projectsContracts.createProposal()
     return false;
   }
 
   // Vote woih amout of token on a given project
   voteOnProject(projectname: string, amount: number): boolean {
     // TODO: Philipp
-    var hello = projectsContracts.incrementVotes(0, (error, result) => {
+    const hello = this.projectsContract.incrementVotes(0, (error, result) => {
       if (!error) {
         console.log(JSON.stringify(result));
       } else {
