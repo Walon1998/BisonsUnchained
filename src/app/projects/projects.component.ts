@@ -1,11 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Project} from './Project';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AccountService} from '../account.service';
-
+import {WEB3} from './web3';
+import Web3 from 'web3';
+import {ABIFile} from './ABIFile';
 
 
 @Component({
@@ -28,13 +30,13 @@ export class ProjectsComponent implements OnInit {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private fb: FormBuilder, private accountservice: AccountService) {
+  constructor(private breakpointObserver: BreakpointObserver, private fb: FormBuilder, private accountservice: AccountService, @Inject(WEB3) private web3: Web3) {
     this.Message = fb.group({
       name: this.name,
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.Projects = this.getAllProjects();
     this.Projects.push(new Project('Doctor Office', 1));
     this.Projects.push(new Project('Kindergarden', 2));
@@ -44,12 +46,19 @@ export class ProjectsComponent implements OnInit {
     this.accountservice.updatedTokencount();
     this.Tokencount = this.accountservice.getTokenCount();
 
-    if (typeof web3 !== 'undefined') {
-      console.log('Web3 Detected! ' + web3.currentProvider.constructor.name);
+    if ('enable' in this.web3.currentProvider) {
+      await this.web3.currentProvider.enable();
+    }
+    const accounts = await this.web3.eth.getAccounts();
+    console.log(accounts);
+
+
+    if (typeof this.web3 !== 'undefined') {
+      console.log('Web3 Detected! ' + this.web3.currentProvider.constructor.name);
       // TODO Philipp
       // const projectsAddress = '0x1611d14ADc2A1a1d5947303DB2180e43AA0f1D5E'; // bleibt die Adresse auch bei Updates des Contracts...?
-      const projectsAddress = '0xbbf289d846208c16edc8474705c748aff07732db';
-      this.projectsContract = web3.eth.contract(projectsABI).at(projectsAddress); // initalize contract
+      const projectsAddress = '0x66c0289d738e7d26ba52c644da712268af34c9dd';
+      this.projectsContract = new this.web3.eth.Contract(ABIFile, projectsAddress); // initalize contract
     } else {
       console.log('No Web3 Detected... using HTTP Provider');
       alert('Please install Metamask, you stupid! Visit https://metamask.io/');
