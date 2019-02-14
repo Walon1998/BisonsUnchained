@@ -75,27 +75,83 @@ function voteOnProject(projectname, amount) {
   return true;
 }
 
-// Returns all projects in an array!
-function getAllProjects() {
+function getLength() {
   return projectsContract.methods.getProposalsLength().call({
     from: userAccount
   }).then((result) => {
-    var Returnarray = [];
-    for (var i = 0; i < result; i++) {
-      projectsContract.methods.getProposal(i).call({
-        from: userAccount
-      }).then((result2) => {
-        if (result2[1]) {
-          Returnarray.push({name: result2[0], voters: result2[2]});
-        }
-        console.log('Item' + result2[0]);
-        console.log('Item' + result2[1]);
-        console.log('Item' + result2[2]);
+    return result;
+  });
+}
+
+function SumUP(length, Returnarray, i) {
+  // var Returnarray = [];
+  // for (var i = 0; i < length; i++) {
+
+
+  return getProposalJS(i).then((result) => {
+    console.log(result);
+    Returnarray.push({name: result[0], voters: result[2]});
+    console.log('add');
+    if (i === length - 1) {
+      return Returnarray;
+    } else {
+      return SumUP(length, Returnarray, i + 1).then((result2) => {
+        return result2;
       });
     }
+
+    // Returnarray.push({name: 'name', voters: "99"});
+    // console.log(result2);
+
+
+  });
+  // return Returnarray;
+
+
+}
+// Returns all projects in an array!
+function getAllProjects() {
+
+  return getLength().then((result) => {
+    var length = result;
+    console.log('Length: ' + length);
+    var Returnarray = [];
+    return SumUP(length, Returnarray, 0);
+
+
+  });
+
+
+  //
+  //
+  // for (var i = 0; i < length; i++) {
+
+  //
+  //   getProposalJS(i).then((result3) => {
+  //     Returnarray.push({name: 'name', voters: "99"});
+  //     var result2 = result3;
+  //     if (result2[1] === true) {
+  //
+  //       Returnarray.push({name: String(result2[0]), voters: String(result2[2])});
+  //       console.log('add!');
+  //       }
+  //     });
+
+
+  // }
     // console.log("Length ist: " + result);
 
-    return Returnarray;
+
+  // });
+}
+
+function getProposalJS(i) {
+  return projectsContract.methods.getProposal(i).call({
+    from: userAccount
+  }).then((result) => {
+    console.log("You read " + result);
+    return result;
+
   });
 }
 

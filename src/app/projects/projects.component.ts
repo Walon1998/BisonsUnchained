@@ -1,10 +1,10 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {Project} from './Project';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AccountService} from '../account.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 declare var getAllProjects: any;
 declare var addProject: any;
@@ -19,13 +19,15 @@ declare var getTokencountfromBlockchain: any;
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit {
-  Projects: Array<any> = [];
+  Projects = new MatTableDataSource<any>();
   name = new FormControl('', [Validators.required]);
   Message: FormGroup;
   displayedColumns: string[] = ['name', 'Votes', 'AddVote'];
   private privateKey: string;
   private publicKey: string;
   public Tokencount: number;
+  // dataSource = new MatTableDataSource<any>();
+
   private projectsContract: any;
 
 
@@ -35,18 +37,23 @@ export class ProjectsComponent implements OnInit {
     );
 
   constructor(private breakpointObserver: BreakpointObserver,
-              private fb: FormBuilder, private accountservice: AccountService) {
+              private fb: FormBuilder, private accountservice: AccountService,
+              private changeDetectorRefs: ChangeDetectorRef) {
     this.Message = fb.group({
       name: this.name,
     });
   }
 
-  ngOnInit() {
-    getAllProjects().then((result) => {
-      this.Projects = result;
 
-      console.log(this.Projects);
+  ngOnInit() {
+    // this.Projects.data = getAllProjects();
+    getAllProjects().then((result) => {
+      this.Projects.data = result;
+      console.log(this.Projects.data);
+      this.changeDetectorRefs.detectChanges();
+      console.log('Changed deteced');
     });
+    console.log(this.Projects.data);
     // getAllProjects();
 
     // this.Projects.push(new Project('Doctor Office', 1));
@@ -79,7 +86,7 @@ export class ProjectsComponent implements OnInit {
         this.Message.reset();
         // getAllProjects();
         getAllProjects().then((result) => {
-          this.Projects = result;
+          this.Projects.data = result;
           console.log(this.Projects);
         });
 
@@ -101,7 +108,7 @@ export class ProjectsComponent implements OnInit {
   TablePlusTapped(name: string) {
     if (voteOnProject(name, 1)) {
       alert('You spent one Token on: ' + name);
-      this.Projects = getAllProjects();
+      // this.dataSource = getAllProjects();
       this.accountservice.updatedTokencount();
       this.Tokencount = this.accountservice.getTokenCount();
     } else {
