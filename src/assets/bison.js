@@ -19,8 +19,9 @@ window.addEventListener('load', function () {
 
       if (result.returnValues[1] === userAccount) {
         //TODO: FIX
-        document.querySelector('body > app-root > app-hunter > mat-sidenav-container > mat-sidenav-content > mat-toolbar > span:nth-child(2)').innerHTML = '\n' +
-          'BisonsUnchained: ' + result.returnValues[0];
+        // document.querySelector('body > app-root > app-hunter > mat-sidenav-container > mat-sidenav-content > mat-toolbar > span:nth-child(2)').innerHTML = '\n' +
+        //   'BisonsUnchained: ' + result.returnValues[0];
+        alert('Something has changed in your account, please log in again.');
       }
 
     });
