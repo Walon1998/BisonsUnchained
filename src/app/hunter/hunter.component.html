@@ -19,7 +19,16 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>BisonsUnchained: {{Tokencount}}</span>
+
+
+
+        <span>BisonsUnchained: {{Tokencount}}</span>
+        <span class="example-spacer"></span>
+        <img style="height: 45px; text-align: right" src="../../assets/img/Shapes_colored_v4.svg"
+             alt="BisonsUnchainedLogo">
+
+
+
     </mat-toolbar>
     <h1 class="mat-h1 title">My Tasks</h1>
     <div class="list">
@@ -33,7 +42,9 @@
       <p style="text-align: right; margin-right: 10px">
         Options selected: {{list.selectedOptions.selected.length}}
       </p>
-      <button style="float: right; margin-right: 10px" mat-raised-button (tap)="Send(list.selectedOptions.selected.length)"> Commit</button>
+      <button style="float: right; margin-right: 10px" mat-raised-button
+              (tap)="Send(list.selectedOptions.selected.length)"> Commit
+      </button>
     </div>
 
     <!-- Add Content Here -->
