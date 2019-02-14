@@ -41,7 +41,7 @@ window.addEventListener('load', function () {
     alert('Please install Metamask, you stupid! Visit https://metamask.io/');
     window.web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/<APIKEY>"));
   }
-})
+});
 
 function getBalance() {
   var address, wei, balance
@@ -101,7 +101,7 @@ function voteOnProject(projectname, amount) {
 }
 
 // Returns all projects in an array!
-function getAllProjects(){
+function getAllProjects() {
   return projectsContract.Proposals.call({
     from: userAccount
   }).then((result) => {

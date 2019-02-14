@@ -4,11 +4,10 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {MatSelectionList} from '@angular/material';
-import {WEB3} from './web3';
-import Web3 from 'web3';
-import {ABIFile} from './ABIFile';
-import {isUndefined} from 'util';
 declare var updateToken: any;
+declare var getTokencountfromBlockchain: any;
+declare var web3: any;
+declare var addToken: any;
 
 @Component({
   selector: 'app-hunter',
@@ -32,8 +31,7 @@ export class HunterComponent implements OnInit {
   private projectsContract: any;
 
   constructor(private accountService: AccountService,
-              private breakpointObserver: BreakpointObserver,
-              @Inject(WEB3) private web3: Web3) {
+              private breakpointObserver: BreakpointObserver) {
   }
 
 
@@ -54,7 +52,7 @@ export class HunterComponent implements OnInit {
     // const accounts = await this.web3.eth.getAccounts();
     // console.log(accounts);
 
-    if (typeof this.web3 !== 'undefined') {
+    if (typeof web3 !== 'undefined') {
 
     } else {
       console.log('No Web3 Detected... using HTTP Provider');
@@ -94,7 +92,7 @@ export class HunterComponent implements OnInit {
 
   Send(length: number) {
     if (addToken(length)) {
-      alert('Congratulations, you\'ve earned' + length + 'VoteToken');
+      alert('Congratulations, you\'ve earned ' + length + ' VoteToken');
       this.accountService.updatedTokencount();
       this.Tokencount = this.accountService.getTokenCount();
     } else {
@@ -106,7 +104,4 @@ export class HunterComponent implements OnInit {
 
   }
 
-  updateToken(tokencount: number) {
-    this.Tokencount = tokencount;
-  }
 }
