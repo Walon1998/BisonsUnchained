@@ -5,6 +5,9 @@ Hosted on: https://walon1998.github.io/BisonsUnchained
 
 ## Dependencies
   * MetaMask or similar service
+  * Angular
+  * Angular Material
+  * ... 
 
   
 
