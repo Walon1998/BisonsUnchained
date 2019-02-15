@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 Hosted on: https://walon1998.github.io/BisonsUnchained
 
 ## Dependencies
-  * MetaMask or similar Service
+  * MetaMask or similar service
 
   
 
