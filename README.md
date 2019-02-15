@@ -1,6 +1,13 @@
 # BisonsUnchained
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.1.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.1 \
+Hosted on: https://walon1998.github.io/BisonsUnchained
+
+## Dependencies
+  * MetaMask or similar Service
+
+  
+
 
 ## Development server
 
